@@ -1,32 +1,31 @@
-const express = require("express");
-const testing_app = express();
+const express = require('express');
 const mongoose = require('mongoose');
-
-
- require("./config");
-
-// mongoose.Promise = global.Promise;
-// mongoose
-//   .connect(process.env.MONGODB_URL, { useNewUrlParser: true })
-//   .then(() => { console.log('Database connection established'); })
-//   .catch((err) => {
-//     console.error(`Database error, exiting. Stack trace:\n${err}`);
-//     process.exit();
-//   });
-
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+require('../config');
+
+mongoose.Promise = global.Promise;
+mongoose
+  .connect(process.env.MONGODB_URL, { useNewUrlParser: true })
+  .then(() => { console.log('Database connection established'); })
+  .catch((err) => {
+    console.error(`Database error, exiting. Stack trace:\n${err}`);
+    process.exit();
+  });
+
+const testing_app = express();
 
 testing_app.use(cors());
 testing_app.use(bodyParser.urlencoded({ extended: true }));
 testing_app.use(bodyParser.json());
 
-testing_app.get('/api', (req, res) => {
-  res.json({ message: 'API ready' });
+testing_app.get('/', (req, res) => {
+  res.json({ welcome: 'you are testing the connections api' });
 });
 
-const api_server = require("./server");
-testing_app.use("/api", api_server);
+const authors = require("./routes");
+testing_app.use("/", connections);
 
 const port = process.env.PORT || 4000;
 testing_app.listen(port, () => {

@@ -2,28 +2,17 @@ const mongoose = require('mongoose');
 
 const profile_schema = mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: [true, ""],
+    accept: {
+      type: Boolean, 
     },
-    lastName: {
-      type: String,
-      required: [true, ""],
+    reject: {
+      type: Boolean,
     },
-    email: {
-      type: String,
-      unique: true,
-      required: [true, ""],
-      lowercase: true,
+    send: {
+      type: id,
     },
-    image: String,
-    password: {
-      type: String,
-      required: true,
-      minlength:5
+    request: id
     },
-
-  }, { timestamps: true }
-);
+   );
 
 module.exports = mongoose.model('profile', profile_schema);

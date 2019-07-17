@@ -1,1 +1,1 @@
-// this file will be used to set up deployment
+module.exports = require("./server");

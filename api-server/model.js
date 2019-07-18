@@ -1,29 +1,22 @@
 const mongoose = require('mongoose');
 
-const profile_schema = mongoose.Schema(
+const connections_schema = mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: [true, ""],
+    accept: {
+      type: Boolean, 
     },
-    lastName: {
-      type: String,
-      required: [true, ""],
+    reject: {
+      type: Boolean,
     },
-    email: {
+    send: {
       type: String,
-      unique: true,
-      required: [true, ""],
-      lowercase: true,
     },
-    image: String,
-    password: {
-      type: String,
-      required: true,
-      minlength:5
+    connectionKnown: {
+      type: String
     },
+    request: String
+    },
+    
+   );
 
-  }, { timestamps: true }
-);
-
-module.exports = mongoose.model('profile', profile_schema);
+module.exports = mongoose.model('connections', connections_schema);

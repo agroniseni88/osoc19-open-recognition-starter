@@ -1,4 +1,4 @@
-const profile = require('./model');
+const connections = require('./model');
 
 const controller = {};
 
@@ -9,15 +9,15 @@ const controller = {};
 
 controller.welcome = (req, res) => {
   console.log("-- GET /all --");
-  res.send("hi, you're at the profile api");
+  res.send("hi, you're at the connections api");
 }
 
 /* ------------------- INDEX -------------------*/
-// GET  "/all"                     => show all profile
+// GET  "/all"                     => show all connections
 
 controller.get_all = (req, res) => {
   console.log("-- GET /all --");
-  profile.find()
+  connections.find()
     // modify the next line based on your project's needs
     .then((db_response) => { res.send(db_response) })
     .catch((err) => {
@@ -29,18 +29,18 @@ controller.get_all = (req, res) => {
 
 /* ------------------- CREATE -------------------*/
 // GET  "/add"                => instructions
-// POST "/add"                => Create new profile
+// POST "/add"                => Create new connections
 
 controller.get_add = (req, res) => {
     console.log("-- GET /add --");
-    res.send('put a new author\'s title in the body and send a post request to this address: { title: "string" }. you\'ll get back the new author\'s entry');
+    res.send('put a new connection name in the body and send a post request to this address: { first_name: "string" }. you\'ll get back the new connection entry');
 }
 
 controller.post_add = (req, res) => {
     console.log("-- POST /add --");
-    const new_title = req.body.title;
-    const new_connection = { title: new_title };
-    profile.create(new_connection)
+    const new_name = req.body.first_name;
+    const new_connection = { first_name: new_name };
+    connections.create(new_connection)
       // modify the next line based on your project's needs
       .then((db_response) => { res.send(db_response) })
       .catch((err) => {
@@ -52,14 +52,14 @@ controller.post_add = (req, res) => {
 
 
 /* ------------------- READ -------------------*/
-// GET  "/find/:id"             => View profile Info with id ...
+// GET  "/:id"             => View connections Info with id ...
 
 
 controller.get_id = (req, res) => {
     const connection_id = req.params.id;
-    console.log("-- GET /"+connection_id+"/find --");
+    console.log("-- GET /"+connection_id+" --");
     const id_object = { _id: connection_id };
-    profile.find(id_object)
+    connections.find(id_object)
       // modify the next line based on your project's needs
       .then((db_response) => { res.send(db_response) })
       .catch((err) => {
@@ -73,23 +73,23 @@ controller.get_id = (req, res) => {
 
 /* ------------------- UPDATE -------------------*/
 // GET  "/:id/update"     => instructions
-// POST "/:id/update"     => update profile with id...
+// POST "/:id/update"     => update connections with id...
 
 
 controller.get_id_update = (req, res) => {
     const connection_id = req.params.id;
     console.log("-- GET /"+connection_id+"/update --");
-    res.send('send a post request to this address a title in the body');
+    res.send('send a post request to this address a first_name in the body');
 }
 
 controller.post_id_update = (req, res) => {
     const connection_id = req.params.id;
     console.log("-- POST /"+connection_id+"/update --");
     const id_object = { _id: connection_id };
-    const title = req.body.title;
-    const title_object = { title: title };
-    profile.update(id_object, title_object)
-      // modify the next line based on your project's needs        
+    const first_name = req.body.first_name;
+    const name_object = { first_name: first_name };
+    connections.update(id_object, name_object)
+      // modify the next line based on your project's needs
       .then((db_response) => { res.send(db_response) })
       .catch((err) => {
         res.status(500).send({
@@ -100,7 +100,7 @@ controller.post_id_update = (req, res) => {
 
 /* ------------------- DELETE -------------------*/
 // GET  "/:id/delete"     => instructions
-// POST "/:id/delete"     => delete profile with id...
+// POST "/:id/delete"     => delete connections with id...
 
 
 controller.get_id_delete = (req, res) => {
@@ -113,7 +113,7 @@ controller.post_id_delete = (req, res) => {
     const connection_id = req.params.id;
     console.log("-- POST /"+connection_id+"/delete --");
     const id_object = { _id: connection_id };
-    profile.remove(id_object)
+    connections.remove(id_object)
       // modify the next line based on your project's needs
       .then((db_response) => { res.send(db_response) })
       .catch((err) => {

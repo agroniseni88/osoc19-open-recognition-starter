@@ -21,11 +21,11 @@ testing_app.use(bodyParser.urlencoded({ extended: true }));
 testing_app.use(bodyParser.json());
 
 testing_app.get('/', (req, res) => {
-  res.json({ welcome: 'you are testing the profile api' });
+  res.json({ welcome: 'you are testing the connections api' });
 });
 
-const profile = require("./routes");
-testing_app.use("/", profile);
+const connections = require("./routes");
+testing_app.use("/", connections);
 
 const port = process.env.PORT || 4000;
 testing_app.listen(port, () => {
